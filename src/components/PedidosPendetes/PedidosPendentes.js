@@ -368,7 +368,7 @@ const PedidosPendentes = () => {
                 <th>#</th>
                 <th>Documento</th>
                 <th>Setor</th>
-                <th>Produtoaaaaaaaaaaaaaaaaaaaaaaaa</th>
+                <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Hora</th>
                 <th>Situação</th>
@@ -404,7 +404,6 @@ const PedidosPendentes = () => {
                           <td>{index + 1}</td>
                           <td>{item.DOCUMENTO}</td>
                           <td>{cleanText(item.IDX_LINHA)}</td>
-                          <td>{item.DTPREVISAO}</td>
                           <td>{item.DESCRICAO}</td>
                           <td>{item.QUANTIDADE}</td>
                           <td>{item.HORAPREVISAO?.slice(0, 2)}:{item.HORAPREVISAO?.slice(2)}</td>

@@ -6,7 +6,7 @@ import { Float } from "@chakra-ui/react";
 
 
 const MapsWithRoute = ({ origin, destination, valorPorKmEncomenda, quantConvidados,quantConvidadosPersonalizado, cepType, kmImperio, kmProfissionais }) => {
-  const apiKey = '';
+  const apiKey = 'AIzaSyAjsdT4YTOXlV97_vrOGfmoTceCx0Nyr6k';
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
 

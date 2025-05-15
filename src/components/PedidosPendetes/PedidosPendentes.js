@@ -73,7 +73,6 @@ const PedidosPendentes = () => {
     // Novo filtro baseado em categoria
     const estaNaCategoriaSelecionada = () => {
       if (categoriaSelecionada === 'Doce') {
-        console.log(setorItem);
         return !setoresSal.includes(setorItem) && !setoresRefeicao.includes(setorItem);
       } else if (categoriaSelecionada === 'Sal') {
         return !setoresDoce.includes(setorItem) && !setoresRefeicao.includes(setorItem);
@@ -99,9 +98,15 @@ const PedidosPendentes = () => {
 
   const getSituacaoEstilo = (item) => {
     const now = new Date();
-    const data = new Date(item.DTPREVISAO);
     const hora = parseInt(item.HORAPREVISAO?.slice(0, 2)) || 0;
     const minuto = parseInt(item.HORAPREVISAO?.slice(2)) || 0;
+    const dataOriginal = new Date(item.DTPREVISAO);
+    const year = dataOriginal.getUTCFullYear();
+    const month = dataOriginal.getUTCMonth();
+    const day = dataOriginal.getUTCDate();
+
+
+    const data = new Date(Date.UTC(year, month, day, hora, minuto, 0, 0));
 
 
     const horaentrega = data.getUTCHours();  // Usando UTC para garantir o horário correto
@@ -114,7 +119,6 @@ const PedidosPendentes = () => {
 
     // Verificando se o evento já passou (atrasado)
     if (data < now) {
-
       const horaFormatada = hora.toString().padStart(2, '0');
       const minutoFormatado = minuto.toString().padStart(2, '0');
       return { text: `Atrasado ${horaFormatada}:${minutoFormatado}`, color: 'red' };
@@ -317,7 +321,6 @@ const PedidosPendentes = () => {
                       // 2.1) Filtra apenas os unicos que existem em dados.products pelo DOCUMENTO
                       const produtosFiltrados = dados.products.filter(item => filterBySearch(item, true));
                       const documentosValidos = new Set(produtosFiltrados.map(p => p.DOCUMENTO));
-                      console.log(documentosValidos)
                       const filtrados = unicos.filter(item => documentosValidos.has(item.DOCUMENTO));
 
 
@@ -365,7 +368,7 @@ const PedidosPendentes = () => {
                 <th>#</th>
                 <th>Documento</th>
                 <th>Setor</th>
-                <th>Produto</th>
+                <th>Produtoaaaaaaaaaaaaaaaaaaaaaaaa</th>
                 <th>Quantidade</th>
                 <th>Hora</th>
                 <th>Situação</th>
@@ -383,7 +386,7 @@ const PedidosPendentes = () => {
                 const produtosPorData = produtosFiltrados.reduce((acc, item) => {
                   const data = new Date(item.DTPREVISAO);
                   const key = `${data.getUTCFullYear()}-${String(data.getUTCMonth() + 1).padStart(2, '0')}-${String(data.getUTCDate()).padStart(2, '0')}`;
-                  console.log(key);
+
                   if (!acc[key]) acc[key] = [];
                   acc[key].push(item);
                   return acc;
@@ -401,6 +404,7 @@ const PedidosPendentes = () => {
                           <td>{index + 1}</td>
                           <td>{item.DOCUMENTO}</td>
                           <td>{cleanText(item.IDX_LINHA)}</td>
+                          <td>{item.DTPREVISAO}</td>
                           <td>{item.DESCRICAO}</td>
                           <td>{item.QUANTIDADE}</td>
                           <td>{item.HORAPREVISAO?.slice(0, 2)}:{item.HORAPREVISAO?.slice(2)}</td>

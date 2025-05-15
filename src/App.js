@@ -1,0 +1,33 @@
+import React, { useState, useEffect } from 'react';
+import PedidosPendentes from "./components/PedidosPendetes/PedidosPendentes";
+import TelaVendas from "./components/TelaVendas/TelaVendas";
+import NavBar from './components/NavBar/Navbar';
+import TelaMapa from './components/TelaMapa/TelaMapa';
+import TelaInicial from './components/TelaInicial/TelaInicial';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import './App.css';
+
+const App = () => {
+
+  return (
+    <div >
+      <Router>
+      {/* <NavBar/> */}
+      <div className="App">
+        
+        <Routes>
+          {/* <Route path="/TelaInicial" element={<TelaInicial />} /> */}
+          <Route path="/vendas" element={<TelaVendas />} />
+          <Route path="/frete" element={<TelaMapa />} /> 
+          <Route path="/pedidos" element={<PedidosPendentes />} />
+        
+        </Routes>
+      </div>
+    </Router>
+    </div>
+  );
+};
+
+export default App;

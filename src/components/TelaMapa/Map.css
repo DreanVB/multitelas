@@ -1,0 +1,30 @@
+.result{
+    display: flex;
+    width: 95%;
+    height: 60px;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    opacity: 0;
+    animation: slideUp 1.2s ease-out forwards;
+    flex-direction: column;
+    transform: translateX(200px);}
+.mapa{
+    display: flex;
+    flex-direction: column;
+    align-items: center
+    
+
+
+}
+p{
+    margin: 10px;
+}
+.rr{
+    display: flex;
+    justify-content: space-evenly;
+}

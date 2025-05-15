@@ -1,0 +1,270 @@
+.submit-btn {
+  position: relative;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: 2px solid #d04186;
+  background: linear-gradient(45deg, #991C52, #d04186, #d04186, #991C52);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-align: center;
+  overflow: hidden;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:hover,
+.submit-btn:focus,
+.submit-btn:active {
+  background: linear-gradient(45deg, #991C52, #d04186, #991C52);
+  color: #d04186;
+  border: 2px solid #d04186;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: white;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 10px;
+
+}
+
+.submit-btn:hover::before,
+.submit-btn:focus::before,
+.submit-btn:active::before {
+  opacity: 1;
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px #991C52;
+}
+
+.input-campo {
+  flex: 1;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-campo:focus {
+  outline: none;
+  box-shadow: 0 0 8px #991C52;
+}
+
+.secao {
+  border-radius: 15px;
+  position: relative;
+  border: 1px solid #991C52;
+  padding-top: 37px;
+  background: #991C52;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.7);
+}
+
+.secao.positioned {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 800px;
+  box-shadow: 0 0 15px #333;
+}
+
+.tabela-vendas {
+  border-radius: 15px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.tabela {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.celula+.celula {
+  border-left: 1px solid #eee;
+}
+
+.celula,
+.cabecalho {
+  border-bottom: 1px solid #eee;
+  background: #ddd;
+  color: #000;
+  padding: 10px 25px;
+}
+
+.cabecalho {
+  height: 0;
+  line-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: transparent;
+  border: none;
+  white-space: nowrap;
+}
+
+.cabecalho-conteudo {
+  position: absolute;
+  background: transparent;
+  color: #fff;
+  padding: 9px 25px;
+  top: 0;
+  margin-left: -25px;
+  line-height: normal;
+  border-left: 1px solid #800;
+}
+
+.cabecalho-primeiro .cabecalho-conteudo {
+  border: none;
+}
+
+.busca-vendas {
+  font-size: x-large;
+  align-items: flex-end;
+  display: flex !important;
+  justify-content: space-between;
+  margin: 0px;
+  color: #000;
+}
+
+.navbar {
+  background-color: #ffffff;
+  width: 100%;
+  height: 70px;
+  padding: 0.5rem;
+  display: flex;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  z-index: 10002;
+}
+
+.titulo-central {
+  text-align: center;
+  padding-top: 5rem;
+  color: #000;
+}
+
+.corpo {
+  padding-top: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.texto-central {
+  text-align: center;
+  margin-top: 15%;
+  color: #000;
+}
+
+.total-fixo {
+  border-radius: 15px;
+}
+
+.filtro-balao {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 14px;
+  color: #333;
+  justify-content: space-between;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.remover-filtro {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #999;
+  margin-left: 8px;
+}
+
+.remover-filtro:hover {
+  color: #ff0000 !important;
+}
+
+.filtros-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.botao-excel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.background-container-vendas {
+  background-image: url('../../assets/background2.png');
+  background-size: cover;
+  /* cobre toda a tela */
+  background-position: center;
+  /* centraliza a imagem */
+  background-repeat: no-repeat;
+  /* evita repetição */
+  background-attachment: fixed;
+
+  min-height: 100vh;
+  /* ocupa toda a altura da tela */
+  width: 100%;
+}
+
+.btn-custom-primary {
+  background: linear-gradient(45deg, #991C52, #d04186, #991C52);
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-primary:hover {
+  background: linear-gradient(45deg, #991C52, #d04186, #991C52);
+  color: #d04186;
+  border: 2px solid #d04186;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.btn-custom-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border: 2px solid #d04186;
+}
+
+.btn-custom-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-custom-primary:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+
+
+.data {
+  display: flex;
+  align-items: flex-end
+}

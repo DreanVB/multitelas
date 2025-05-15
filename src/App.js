@@ -19,9 +19,9 @@ const App = () => {
         
         <Routes>
           {/* <Route path="/TelaInicial" element={<TelaInicial />} /> */}
-          <Route path="/vendas" element={<TelaVendas />} />
+          <Route path="/pascoa" element={<TelaVendas />} />
           <Route path="/frete" element={<TelaMapa />} /> 
-          <Route path="/pedidos" element={<PedidosPendentes />} />
+          <Route path="/tela-mac" element={<PedidosPendentes />} />
         
         </Routes>
       </div>

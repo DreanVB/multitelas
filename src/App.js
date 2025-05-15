@@ -4,6 +4,7 @@ import TelaVendas from "./components/TelaVendas/TelaVendas";
 import NavBar from './components/NavBar/Navbar';
 import TelaMapa from './components/TelaMapa/TelaMapa';
 import TelaInicial from './components/TelaInicial/TelaInicial';
+import ProdutosPendentes from './components/ProdutosPendentes/ProdutosPendentes'
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/vendas" element={<TelaVendas />} />
           <Route path="/frete" element={<TelaMapa />} /> 
           <Route path="/pedidos" element={<PedidosPendentes />} />
+          <Route path="/produtos" element={<ProdutosPendentes />} />
         
         </Routes>
       </div>

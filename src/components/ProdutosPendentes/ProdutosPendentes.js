@@ -73,7 +73,6 @@ const ProdutosPendentes = () => {
     // Novo filtro baseado em categoria
     const estaNaCategoriaSelecionada = () => {
       if (categoriaSelecionada === 'Doce') {
-        console.log(setorItem);
         return !setoresSal.includes(setorItem) && !setoresRefeicao.includes(setorItem);
       } else if (categoriaSelecionada === 'Sal') {
         return !setoresDoce.includes(setorItem) && !setoresRefeicao.includes(setorItem);
@@ -133,7 +132,6 @@ const ProdutosPendentes = () => {
       return { text: `${formatOnlyDate(data)} ${horaFormatada}:${minutoFormatado}`, color: 'goldenrod' };
     }
   };
-
 
 
 
@@ -211,28 +209,120 @@ const ProdutosPendentes = () => {
 
       <div className="d-flex gap-2 my-3">
         <Button
-          variant={categoriaSelecionada === 'Doce' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('Doce')}
+          variant={categoriaSelecionada === 'C1' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C1')}
         >
-          Doces
+          C1
         </Button>
         <Button
-          variant={categoriaSelecionada === 'Sal' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('Sal')}
+          variant={categoriaSelecionada === 'C2' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C2')}
         >
-          Salgados
+          C2
         </Button>
         <Button
-          variant={categoriaSelecionada === 'Refeição' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('Refeição')}
+          variant={categoriaSelecionada === 'C3' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C3')}
         >
-          Refeições
+          C3
         </Button>
         <Button
-          variant={categoriaSelecionada === '' ? 'primary' : 'outline-primary'}
+          variant={categoriaSelecionada === 'M1' ? 'primary' : 'outline-primary'}
           onClick={() => handleFiltroChange('')}
         >
-          Todos
+          M1
+        </Button>
+
+        <Button
+          variant={categoriaSelecionada === 'M2' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          M2
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'M3' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          M3
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'M4' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          M4
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'M5' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          M5
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'M6' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          M6
+        </Button>
+         <Button
+          variant={categoriaSelecionada === 'Doce Geral' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          Doce Geral
+        </Button>
+
+        <Button
+          variant={categoriaSelecionada === 'S1' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S1
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S2' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S2
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S3' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S3
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S4' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S4
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S5' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S5
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S6' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S6
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S7' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S7
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S8' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S8
+        </Button>
+        <Button
+          variant={categoriaSelecionada === 'S9' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          S9
         </Button>
 
       </div>
@@ -255,7 +345,7 @@ const ProdutosPendentes = () => {
       </div>
         {/* Tabela de Produtos */}
         <div className = "d-flex justify-content-center">
-          <div className="col-md-6">
+          <div className="col-12">
             <h4>Itens</h4>
               <table className="table table-striped">
                 <thead className="thead-dark">
@@ -276,20 +366,36 @@ const ProdutosPendentes = () => {
                   {(() => {
                     if (!dados?.products) return null;
 
-                    const produtosFiltrados = dados.products.filter(item => filterBySearch(item, true));
-                    // console.log(dados.products)
-                    // console.log(produtosFiltrados)
-                    // 1. Agrupar por data, considerando filtro
+                    const products = dados.products;
+                    const produtosFiltrados = products.filter(item => filterBySearch(item, true));
+                    const totaisPorDescricao = {};
 
+                    //Cria um array totaisPorDescricao e vai somando o total de acordo
+                    //se existe o produto com descricao, adiciona aonde a descricao for tal,
+                    //se nao existe ele adiciona o produto e coloca 0 no total.
+
+                    products.forEach(item => {
+                      if (!totaisPorDescricao[item.DESCRICAO]) {
+                        totaisPorDescricao[item.DESCRICAO] = 0;
+                      }
+                        totaisPorDescricao[item.DESCRICAO] += item.QUANTIDADE;
+                    });
+
+                    products.forEach(item => {
+
+                      //adiciona a coluna TOTALPRODUTO a item, aonde a chave de totaisPorDescricao
+                      // for o nome de item.
+
+                      item.TOTALPRODUTO = totaisPorDescricao[item.DESCRICAO];
+                    });
+                    
                     const produtosPorData = produtosFiltrados.reduce((acc, item) => {
                       const data = new Date(item.DTPREVISAO);
                       const key = `${data.getUTCFullYear()}-${String(data.getUTCMonth() + 1).padStart(2, '0')}-${String(data.getUTCDate()).padStart(2, '0')}`;
-                      console.log(key);
                       if (!acc[key]) acc[key] = [];
                       acc[key].push(item);
                       return acc;
                     }, {});
-
 
                     const diasOrdenados = Object.keys(produtosPorData).sort();
 
@@ -305,21 +411,13 @@ const ProdutosPendentes = () => {
                               <td>{item.DESCRICAO}</td>
                               <td>{item.QUANTIDADE}</td>
                               <td>{item.HORAPREVISAO?.slice(0, 2)}:{item.HORAPREVISAO?.slice(2)}</td>
-                              {(() => {
-                                const situacao = getSituacaoEstilo(item);
-                                return (
-                                  <td style={{ color: situacao.color }}>
-                                    {(() => {
-                                      const situacao = getSituacaoEstilo(item);
-                                      return (
-                                        <td style={{ color: situacao.color }}>
-                                          {situacao.text.includes(':') ? situacao.text.split(' ')[0] : situacao.text}
-                                        </td>
-                                      );
-                                    })()}
-                                  </td>
-                                );
-                              })()}
+                              <td style={{ color: getSituacaoEstilo(item).color }}>
+                                {(() => {
+                                  const situacao = getSituacaoEstilo(item);
+                                  return situacao.text.includes(':') ? situacao.text.split(' ')[0] : situacao.text;
+                                })()}
+                              </td>
+                              <td>{parseFloat(Number(item.TOTALPRODUTO).toFixed(3))}</td>
                             </tr>
                           ))}
                       </React.Fragment>

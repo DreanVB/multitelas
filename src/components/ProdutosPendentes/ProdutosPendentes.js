@@ -71,20 +71,18 @@ const ProdutosPendentes = () => {
     const setorItem = cleanText(item.IDX_LINHA || '');
 
     // Novo filtro baseado em categoria
-    const estaNaCategoriaSelecionada = () => {
-      if (categoriaSelecionada === 'Doce') {
-        return !setoresSal.includes(setorItem) && !setoresRefeicao.includes(setorItem);
-      } else if (categoriaSelecionada === 'Sal') {
-        return !setoresDoce.includes(setorItem) && !setoresRefeicao.includes(setorItem);
-      } else if (categoriaSelecionada === 'Refeição') {
-        return !setoresDoce.includes(setorItem) && !setoresSal.includes(setorItem);
-      }
-      return true; // Se não há categoria selecionada, mostra tudo
-    };
+    const estaNaCategoriaSelecionada = () => { 
+         if (setorItem === categoriaSelecionada) {
+        return true; 
+        }else if(categoriaSelecionada === ''){
+          return true;
+        } 
 
-    const correspondeSetor = setoresSelecionados.length === 0 || setoresSelecionados.includes(setorItem);
-    return correspondeTermo && correspondeSetor && estaNaCategoriaSelecionada();
   };
+
+  const correspondeSetor = setoresSelecionados.length === 0 || setoresSelecionados.includes(setorItem);
+  return correspondeTermo && correspondeSetor && estaNaCategoriaSelecionada();
+}
 
 
   useEffect(() => {
@@ -209,120 +207,126 @@ const ProdutosPendentes = () => {
 
       <div className="d-flex gap-2 my-3">
         <Button
-          variant={categoriaSelecionada === 'C1' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('C1')}
+          variant={categoriaSelecionada === 'C-1' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C-1')}
         >
-          C1
+          C-1
         </Button>
         <Button
-          variant={categoriaSelecionada === 'C2' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('C2')}
+          variant={categoriaSelecionada === 'C-2' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C-2')}
         >
-          C2
+          C-2
         </Button>
         <Button
-          variant={categoriaSelecionada === 'C3' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('C3')}
+          variant={categoriaSelecionada === 'C-3' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('C-3')}
         >
-          C3
+          C-3
         </Button>
         <Button
-          variant={categoriaSelecionada === 'M1' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-1' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-1')}
         >
-          M1
+          M-1
         </Button>
 
         <Button
-          variant={categoriaSelecionada === 'M2' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-2' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-2')}
         >
-          M2
+          M-2
         </Button>
         <Button
-          variant={categoriaSelecionada === 'M3' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-3' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-3')}
         >
-          M3
+          M-3
         </Button>
         <Button
-          variant={categoriaSelecionada === 'M4' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-4' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-4')}
         >
-          M4
+          M-4
         </Button>
         <Button
-          variant={categoriaSelecionada === 'M5' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-5' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-5')}
         >
-          M5
+          M-5
         </Button>
         <Button
-          variant={categoriaSelecionada === 'M6' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          variant={categoriaSelecionada === 'M-6' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('M-6')}
         >
-          M6
+          M-6
         </Button>
          <Button
           variant={categoriaSelecionada === 'Doce Geral' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('Doce Geral')}
         >
           Doce Geral
         </Button>
 
         <Button
           variant={categoriaSelecionada === 'S1' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S1')}
         >
           S1
         </Button>
         <Button
           variant={categoriaSelecionada === 'S2' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S2')}
         >
           S2
         </Button>
         <Button
           variant={categoriaSelecionada === 'S3' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S3')}
         >
           S3
         </Button>
         <Button
           variant={categoriaSelecionada === 'S4' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S4')}
         >
           S4
         </Button>
         <Button
           variant={categoriaSelecionada === 'S5' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S5')}
         >
           S5
         </Button>
         <Button
           variant={categoriaSelecionada === 'S6' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S6')}
         >
           S6
         </Button>
         <Button
           variant={categoriaSelecionada === 'S7' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S7')}
         >
           S7
         </Button>
         <Button
           variant={categoriaSelecionada === 'S8' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S8')}
         >
           S8
         </Button>
         <Button
           variant={categoriaSelecionada === 'S9' ? 'primary' : 'outline-primary'}
-          onClick={() => handleFiltroChange('')}
+          onClick={() => handleFiltroChange('S9')}
         >
           S9
+        </Button>
+         <Button
+          variant={categoriaSelecionada === '' ? 'primary' : 'outline-primary'}
+          onClick={() => handleFiltroChange('')}
+        >
+          Todos
         </Button>
 
       </div>

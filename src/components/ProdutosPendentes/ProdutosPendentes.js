@@ -32,7 +32,7 @@ const ProdutosPendentes = () => {
     setLoading(true); // Inicia o carregamento
 
     try {
-      const response = await fetch(`http://192.168.1.250/server-pascoa/busca-mc?startDate=${startDate}&endDate=${endDate}`);
+      const response = await fetch(`http://localhost:4000/produtos-pendentes?startDate=${startDate}&endDate=${endDate}`);
       if (!response.ok) throw new Error('Erro ao buscar dados');
       const json = await response.json();
 
@@ -55,21 +55,21 @@ const ProdutosPendentes = () => {
   };
   const filterBySearch = (item, aplicarFiltroSetor = true) => {
     if (!item) return false;
-
+    
     const removerAcentos = (str) =>
       str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
+    
     const termo = removerAcentos(searchTerm.toLowerCase());
     const documento = removerAcentos(String(item.DOCUMENTO || '').toLowerCase());
     const nome = removerAcentos(String(item.NOME || '').toLowerCase());
     const descricao = removerAcentos(String(item.DESCRICAO || '').toLowerCase());
-
+    
     const correspondeTermo = !searchTerm || documento.includes(termo) || nome.includes(termo) || descricao.includes(termo);
-
+    
     if (!aplicarFiltroSetor) return correspondeTermo;
-
+    
     const setorItem = cleanText(item.IDX_LINHA || '');
-
+    
     // Novo filtro baseado em categoria
     const estaNaCategoriaSelecionada = () => { 
          if (setorItem === categoriaSelecionada) {
@@ -359,6 +359,7 @@ const ProdutosPendentes = () => {
                     <th>Setor</th>
                     <th>Produto</th>
                     <th>Quantidade</th>
+                    <th>Unidade</th>
                     <th>Hora</th>
                     <th>Situação</th>
                     <th>Quantidade total</th>
@@ -368,9 +369,11 @@ const ProdutosPendentes = () => {
                 </thead>
                 <tbody>
                   {(() => {
-                    if (!dados?.products) return null;
+                    if (!dados) return null;
 
-                    const products = dados.products;
+                    const products = dados;
+                  
+
                     const produtosFiltrados = products.filter(item => filterBySearch(item, true));
                     const totaisPorDescricao = {};
 
@@ -382,7 +385,8 @@ const ProdutosPendentes = () => {
                       if (!totaisPorDescricao[item.DESCRICAO]) {
                         totaisPorDescricao[item.DESCRICAO] = 0;
                       }
-                        totaisPorDescricao[item.DESCRICAO] += item.QUANTIDADE;
+                        totaisPorDescricao[item.DESCRICAO] += item.QUANTIDADE[0];
+                        console.log(item.QUANTIDADE)
                     });
 
                     products.forEach(item => {
@@ -413,7 +417,8 @@ const ProdutosPendentes = () => {
                               <td>{item.DOCUMENTO}</td>
                               <td>{cleanText(item.IDX_LINHA)}</td>
                               <td>{item.DESCRICAO}</td>
-                              <td>{item.QUANTIDADE}</td>
+                              <td>{item.QUANTIDADE[0]}</td>
+                              <td>{item.UNIDADE}</td>
                               <td>{item.HORAPREVISAO?.slice(0, 2)}:{item.HORAPREVISAO?.slice(2)}</td>
                               <td style={{ color: getSituacaoEstilo(item).color }}>
                                 {(() => {
@@ -422,6 +427,7 @@ const ProdutosPendentes = () => {
                                 })()}
                               </td>
                               <td>{parseFloat(Number(item.TOTALPRODUTO).toFixed(3))}</td>
+                              <td>{item.QUANTIDADE[1]}</td>
                             </tr>
                           ))}
                       </React.Fragment>

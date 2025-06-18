@@ -32,7 +32,7 @@ const PedidosPendentes = () => {
     setLoading(true); // Inicia o carregamento
 
     try {
-      const response = await fetch(`http://192.168.1.250/server-pascoa/busca-mc?startDate=${startDate}&endDate=${endDate}`);
+      const response = await fetch(`http://localhost:4000/produtos-pendentes?startDate=${startDate}&endDate=${endDate}`);
       if (!response.ok) throw new Error('Erro ao buscar dados');
       const json = await response.json();
 

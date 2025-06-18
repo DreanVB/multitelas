@@ -386,7 +386,6 @@ const ProdutosPendentes = () => {
                         totaisPorDescricao[item.DESCRICAO] = 0;
                       }
                         totaisPorDescricao[item.DESCRICAO] += item.QUANTIDADE[0];
-                        console.log(item.QUANTIDADE)
                     });
 
                     products.forEach(item => {
@@ -427,7 +426,13 @@ const ProdutosPendentes = () => {
                                 })()}
                               </td>
                               <td>{parseFloat(Number(item.TOTALPRODUTO).toFixed(3))}</td>
-                              <td>{item.QUANTIDADE[1]}</td>
+
+                              <td>
+                                {item.QUANTIDADE[1] ? item.QUANTIDADE[1] : 'Sem Ajuste'}
+                              </td>
+                              <td>
+                                {item.DESCRICAO_AJUSTE}
+                              </td>
                             </tr>
                           ))}
                       </React.Fragment>

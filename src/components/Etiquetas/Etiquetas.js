@@ -33,7 +33,7 @@ const Etiquetas = () => {
   const [validade, setValidade] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.112:4000/api/produtos')
+    fetch('http://192.168.1.250/server-pascoa/api/produtos')
     .then(res => res.json())
     .then(data => setProdutos(data));
   }, []);

@@ -12,7 +12,7 @@ const Fiscal = () => {
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
-      fetch('http://192.168.1.168:4000/nota?documentos=472946,472950,472952')
+    fetch('http://192.168.1.168:4000/nota?documentos=472946,472950,472952')
       .then(res => res.json())
       .then(data => setEventos(data));
   }, []);
@@ -61,13 +61,13 @@ const Fiscal = () => {
       {/* Modal */}
       {showModal && (
         <div className="modal fade show" style={{ display: 'block', background: 'rgba(0,0,0,0.5)' }} tabIndex="-1">
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Faturamento</h5>
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 <table className="table table-sm">
                   <thead>
                     <tr>
@@ -83,9 +83,24 @@ const Fiscal = () => {
                       <tr key={i}>
                         {Object.entries(ev)
                           .filter(([col]) => col !== 'PK_DOCTOPED' && col !== 'DOCUMENTO')
-                          .map(([col, val], j) => (
-                            <td key={j}>{val}</td>
-                          ))}
+                          .map(([col, val], j) => {
+                            let displayValue = val;
+
+                            // Remover caracteres não imprimíveis de IDX_NEGOCIO
+                            if (col === 'IDX_NEGOCIO' && typeof val === 'string') {
+                              displayValue = val.replace(/[^\x20-\x7E]/g, '');
+                            }
+
+                            // Formatar LPRECOTOTAL como moeda brasileira
+                            if (col === 'LPRECOTOTAL' && typeof val === 'number') {
+                              displayValue = val.toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                              });
+                            }
+
+                            return <td key={j}>{displayValue}</td>;
+                          })}
                       </tr>
                     ))}
                   </tbody>
@@ -99,6 +114,7 @@ const Fiscal = () => {
           </div>
         </div>
       )}
+
       <table className="table table-bordered mt-4">
         <thead>
           <tr>

@@ -312,13 +312,29 @@ const Fiscal = () => {
               <td>{row.documento}</td>
               <td>{row.nome}</td>
               <td>{formatDate(row.data)}</td>
-              <td>{row.cnpjCpf}</td>
-              <td>{row.total && !isNaN(row.total) ? row.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}</td>
-              <td>{row.valorFaturado && !isNaN(row.valorFaturado) ? row.valorFaturado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}</td>
-              <td>{row.valorPago && !isNaN(row.valorPago) ? row.valorPago.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}</td>
-              <td style={{ color: row.statusFat === 'N' ? 'red' : 'green', fontWeight: 'bold' }}>
-                {row.statusFat === 'N' ? 'Não Faturado' : 'Faturado'}
-              </td>
+               <td>{row.cnpjCpf}</td>
+              <td>{row.total && !isNaN(row.total)
+                ? row.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                : '-'}</td>
+              <td>{row.valorFaturado && !isNaN(row.total)
+                ? row.valorFaturado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                : '-'}</td>
+              <td
+                style={{
+                  color: row.valorPago === row.valorFaturado ? 'green' : (row.valorPago < row.valorFaturado ? 'red' : 'green'),
+                  fontWeight: 'bold'
+                }}
+              >
+                {row.valorPago && !isNaN(row.valorPago)
+                  ? row.valorPago.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                  : '-'}</td>
+              <td
+                style={{
+                  color: row.statusFat === 'N' ? 'red' : 'green',
+                  fontWeight: 'bold'
+                }}
+              >
+                {row.statusFat === 'N' ? 'Não Faturado' : 'Faturado'}</td>
             </tr>
           ))}
         </tbody>
